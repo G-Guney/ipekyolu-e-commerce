@@ -1,0 +1,152 @@
+{% extends "partials/_main.html" %}
+{% load static %}
+
+{% block style %}
+<style>
+.category-card {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 400px;
+    transition: all 0.5s ease;
+    cursor: pointer;
+  }
+  .category-card:hover{
+      transform: scale(0.95);
+  }
+  .category-card:hover .card-link{
+      display: block;
+  }
+  .category-card img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2;
+  }
+  .category-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Karartma rengi */
+    z-index: -1;
+    transition: all 1s ease;
+  }
+  .category-card:hover::before{
+    background-color: transparent; /* Karartma rengi */
+  }
+  .content {
+    text-align: center;
+    color: #fff;
+    transition: all 0.6s ease;
+  }
+  .card-link {
+      display: none;
+      text-decoration: none;
+      color: #fff;
+      
+  }
+</style>
+{% endblock style %}
+
+{% block content %}
+
+<!-- carousel start -->
+<div id="carouselExampleCaptions" class="carousel slide mt-md-5 mt-sm-3 mt-1">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+
+    {% for carousel in carousels %}
+      <div class="carousel-item active">
+        <img src="{{carousel.image.url}}" class="d-block w-100 object-fit-cover" height="800px" alt="...">
+        <div class="carousel-caption d-md-block t">
+          <h5 class="text-light display-1">{{carousel.head}}</h5>
+          <p class="text-break fs-1">{{carousel.title}}</p>
+        </div>
+      </div>
+    {% endfor %}
+
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+</div>
+<!-- carousel end -->
+<!-- category start -->
+<div class="container mt-5">
+  <!-- categories start -->
+    <h2 class="mt-3 mb-3">Popüler Kategoriler</h2>
+      <div class="row d-flex justify-content-center">
+      {% for category in categories %}
+          <div class="category-card rounded-2 col-4 m-1" style="max-width: 40rem; max-height: 15rem; width: 100%;">
+              <img src="{{category.image.url}}" alt="Background Image">
+              <div class="content">
+              <h5 class="text-white fs-3">{{category.name}}</h5>
+              <p>{{category.title}}</p>
+              <a href="{% url 'products_by_category' category.slug %}" class="card-link">Kategorideki Ürünler <i class="bi bi-box-arrow-up-right"></i></a>
+              </div>
+          </div>
+      {% endfor %}
+  <!-- categories end -->
+  </div>
+  <!-- resiter now start-->
+  <div class="row my-5">
+    <div class="col-10 m-auto">
+      <a href="{% url 'customerRegister' %}" class="btn btn-outline-warning btn-lg w-100 rounded-5">Hemen İpekYolu'na Kaydol ve Alışverişe Başla</a>
+    </div>
+  </div>
+  <div class="row my-5">
+    <div class="col-10 m-auto">
+      <a href="{% url 'sellerRegister' %}" class="btn btn-outline-success btn-lg w-100 rounded-5">Satıcı Mısın? Satış Yapmak İçin Kaydol</a>
+    </div>
+  </div>
+  <!-- resiter now end-->
+  <!-- main content start -->
+  <div class="row my-5">
+    <div class="col-12">
+      <h3>İpekYolu</h3>
+      <p class="p-3 mb-2 bg-body-tertiary shadow-sm rounded-3">
+        İpekyolu'na Hoş geldiniz , tüm alışveriş ihtiyaçlarınızın karşılandığı dijital bir pazar alanına. Yerel ve küresel olarak çeşitli ürünler ve benzersiz eserler sunan bir platform oluşturduk. İpekyolu, hem alıcıları hem de satıcıları, kaliteli ve çeşitli ürün yelpazesinde bir araya getirir.
+        <br>
+        <br>
+        İpekyolu'nda, her bütçeye uygun eşsiz ürünler bulabilirsiniz. Küçük işletmelerden büyük markalara kadar çok çeşitli satıcıları bünyemizde bulunduruyoruz. Kendi işinizi genişletmek mi istiyorsunuz? İpekyolu'nda kendi dükkanınızı açabilir ve ürünlerinizi binlerce müşteriye sunabilirsiniz.
+        <br>
+        <br>
+        Her ürün, satın alma deneyiminizi sorunsuz ve keyifli hale getirmek için titizlikle incelenir ve doğrulanır. Güvenli ödeme seçeneklerimiz ve hızlı, güvenilir teslimat seçeneklerimizle, alışveriş yapmanın daha kolay bir yolunu bulamazsınız.
+        <br>
+        <br>
+        İpekyolu'na hoş geldiniz - alışveriş deneyiminizi daha zengin ve heyecan verici hale getirecek çok sayıda ürün keşfetmeye hazır olun.
+        <br><br>
+        İpekyolu'nda, alışveriş deneyiminizi tamamen sizin kontrolünüzde hale getiriyoruz. Bir ürün gördünüz ve beğendiniz mi? Kolayca sepetinize ekleyin ve alışverişinize devam edin. Henüz satın almak için karar vermediniz mi? Favorilere ekleyin ve daha sonra tekrar göz atmak üzere saklayın. Sadece birkaç tıklama ile istediğiniz her şeyi organize edebilir ve kişiselleştirebilirsiniz.
+
+        Üyeliğinizi oluşturarak, sadece birkaç dakika içinde alışveriş yapmaya başlayabilirsiniz. Üye olmanın avantajları arasında daha hızlı ve daha kolay alışveriş, favori ürünlerinizi ve satıcılarınızı kaydetme ve yeni ürünler, teklifler ve promosyonlar hakkında bilgilendirilme bulunmaktadır.
+
+        Her sipariş, özenle paketlenir ve hızla kargolanır. Siparişlerinizi kolayca takip edebilir ve ne zaman teslim edileceğini görebilirsiniz. İpekyolu'nda, alışveriş sürecinizin her aşamasını kontrol etmeniz için size araçlar ve bilgiler sağlıyoruz.
+
+        İpekyolu, kolay ve kişiselleştirilmiş bir alışveriş deneyimi sunar. Her adımda sizinle birlikteyiz - seçim yapmaktan sipariş takibine kadar. Şimdi üye olun ve alışverişe başlayın!
+      </p>
+    </div>
+  </div>
+  <!-- main content end -->
+
+
+
+</div>
+<!-- category ned -->
+  
+{% endblock content %}

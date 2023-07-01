@@ -1,0 +1,22 @@
+{% extends "partials/_sellerMain.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+    <h3 class="my-2 my-md-3 bg-body-tertiary rounded-5 shadow-sm p-3">Ürün Oluştur</h3>
+    <div class="row p-1 rounded-4 shadow-sm m-md-5">
+        <form action="" enctype="multipart/form-data" method="POST" class="">
+            {% csrf_token %}
+            {{form.as_p}}
+            {{form.media}}
+            <input type="submit" value="Oluştur" class="btn btn-primary m-2">
+        </form>
+    </div>
+    <div class="row flex-md-row flex-column align-items-center justify-content-center" style="height: 50vh;">
+        <div class="col-4"><a class="btn btn-outline-primary shadow me-2" href="{% url 'addProduct' %}"><i class="bi bi-plus-square fs-1"></i></a><small class="d-block fs-2" > Ürün Ekle</small></div>
+        <div class="col-4"><a class="btn btn-outline-primary shadow me-2" href="{% url 'myProducts' %}"><i class="bi bi-tag fs-1"></i></a><small class="d-block fs-2" > Eklediğim Ürünler</small></div>
+        <div class="col-4"><a class="btn btn-outline-primary shadow me-2" href="{% url 'sellerLogout' %}"><i class="bi bi-box-arrow-left fs-1"></i></a><small class="d-block fs-2" > Çıkış Yap</small></div>
+    </div>
+</div>
+{% endblock content %}

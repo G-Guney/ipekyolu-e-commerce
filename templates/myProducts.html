@@ -1,0 +1,57 @@
+{% extends "partials/_sellerMain.html" %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+<div class="container">
+    <div class="row flex-md-row flex-column align-items-center justify-content-center m-3">
+        <div class="col-4"><a class="btn btn-outline-primary shadow me-2" href="{% url 'addProduct' %}"><i class="bi bi-plus-square fs-1"></i></a><small class="d-block fs-2" > Ürün Ekle</small></div>
+        <div class="col-4"><a class="btn btn-outline-primary shadow me-2" href="{% url 'myProducts' %}"><i class="bi bi-tag fs-1"></i></a><small class="d-block fs-2" > Eklediğim Ürünler</small></div>
+        <div class="col-4"><a class="btn btn-outline-primary shadow me-2" href="{% url 'sellerLogout' %}"><i class="bi bi-box-arrow-left fs-1"></i></a><small class="d-block fs-2" > Çıkış Yap</small></div>
+    </div>
+    <div class="row">
+        <h4 class="row p-3 m-2 bg-body-tertiary shadow-sm rounded-3">EKlediğim Ürünler</h4>
+        <div class="row d-flex align-items-center justify-content-center gap-3">
+            {% for product in products %}
+                <div class="card col-4 bg-body-tertiary m-1 rounded-4" style="width: 18rem; min-height: 550px;">
+                    <img class="card-img-top img-thumbnail rounded-4" src="{{product.image.url}}" alt="Card image cap">
+                    <div class="card-body">
+                      <h5 class="card-title">{{product.name}}</h5>
+                      <p class="card-text">{{product.title}}</p>
+                      <p>{{product.category}}</p>
+                    </div>
+                    <div class="p-1">
+                        <p class="ms-2">{{product.price | intcomma}}₺</p>
+                    </div>
+
+                    <!-- Modal -->
+                                <div class="modal fade" id="exampleModal{{product.id}}" tabindex="-1" aria-labelledby="exampleModalLabel{{product.id}}" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Ürün Kaldır</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Ürünü Kaldırmak istediğinize emin misiniz?
+                                            <form method="POST">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="productId" value="{{product.id}}">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hayır</button>
+                                                <input type="submit" value="Evet, Kaldır" class="btn btn-danger m-2">
+                                            </form>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                    <!-- modal -->
+                    <button type="button" class="btn btn-danger m-2" data-bs-toggle="modal" data-bs-target="#exampleModal{{product.id}}">
+                        Kaldır
+                    </button>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

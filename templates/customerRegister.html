@@ -1,0 +1,20 @@
+{% extends "partials/_main.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+    <h3 class="my-2 my-md-3 bg-body-tertiary rounded-5 shadow-sm p-3">Kayıt Ol</h3>
+    <div class="row p-1 rounded-4 shadow-sm m-md-5"style="height: 50vh;">
+        <form action="" method="POST" class="">
+            {% csrf_token %}
+            {{form.as_p}}
+            <input type="submit" value="Kayıt Ol" class="btn btn-primary m-1">
+        </form>
+    </div>
+    <div class="row p-1 m-1 rounded-4 m-md-5">
+        <h5 class="my-2 my-md-3 bg-body-tertiary rounded-5 shadow-sm p-3">Zaten Kayıtlı Mısın?</h5>
+        <a class="btn btn-primary m-md-2" href="{% url 'customerLogin' %}">Hemen Giriş Yap</a>
+    </div>
+</div>
+{% endblock content %}

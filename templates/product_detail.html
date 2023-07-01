@@ -1,0 +1,41 @@
+{% extends "partials/_main.html" %}
+{% load static %}
+{% load humanize %}
+
+{% block style %}
+<style>
+
+</style>
+{% endblock style %}
+
+{% block content %}
+    <div class="container my-3 my-md-5">
+        <div class="row m-1 m-md-4 bg-dark-subtle rounded p-2">
+            <h3>{{product.name}}</h3>       
+        </div>
+        <div class="row d-flex bg-body-tertiary p-1 rounded-4">
+                <div class=" col-md-4 col-12 card bg-body-tertiary m-1 rounded-4" style="width: 32rem;">
+                    <img class="card-img-top img-thumbnail rounded-4" src="{{product.image.url}}" alt="Card image cap">
+                </div>
+                <div class=" col-md-4 col-12 card card-body d-flex rounded-4 shadow-sm m-1 align-items-start justify-content-around ">
+                    <h5 class="card-title">{{product.name}}</h5>
+                    <h6 class="card-title">{{product.title}}</h6>
+                    <div class="">
+                        <p class="">Fiyat : {{product.price | intcomma}}₺</p>
+                        <div class="rounded-4 d-flex shadow-sm p-md-3 p-1">
+                                <form method="POST" class="d-flex justify-content-end">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="productId" value="{{product.id}}">
+                                    <input type="number" class="form-control m-1" name="unit" value="1">
+                                    <button type="submit" class="btn card-link btn-primary rounded-3"><i class="bi bi-cart-plus fs-4"></i>Sepete Ekle</button>
+                                </form>
+                        </div>
+                    </div>
+                </div>
+                <div class=" col-md-4 col-12 card card-body rounded-4 shadow-sm m-1">
+                    <h6>Ürün Açıklaması: </h6>
+                    <p class="card-text">{{product.description}}</p>
+                </div>
+        </div>
+    </div>
+{% endblock content %}

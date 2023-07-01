@@ -1,0 +1,59 @@
+{% extends "partials/_sellerMain.html" %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+<div class="container">
+    <div class="row flex-md-row flex-column align-items-center justify-content-center" style="min-height: 50vh;">
+        <div class="col-4">
+            <a class="btn btn-outline-primary shadow me-2" href="{% url 'orders' %}"><i class="bi bi-bag fs-1"></i></a><small class="d-block fs-2" > Sipariş Geçmişi</small>
+        </div>
+        <div class="col-4">
+            <a class="btn btn-outline-primary shadow me-2" href="{% url 'cart' %}"><i class="bi bi-bag fs-1"></i></a><small class="d-block fs-2" > Sepetim</small>
+        </div>
+        <div class="col-4">
+            <a class="btn btn-outline-primary shadow me-2" href="{% url 'customerLogout' %}"><i class="bi bi-box-arrow-left fs-1"></i></a><small class="d-block fs-2" > Çıkış Yap</small>
+        </div>
+    </div>
+
+        {% if payments %}
+        <div class="row align-items-center justify-content-center">
+            {% for payment in payments %}
+                <div class="rounded-4 shadow-sm m-3">
+                    <h5 class="p-1 m-1">{{payment.date}} Tarihli Sipariş</h5>
+                    <p class="m-1 text-success">Toplam Ödenen: {{payment.total| intcomma}}₺</p>
+                    {% for order in payment.products.all %}
+
+                        <div class="bg-body-tertiary m-1 rounded-4 align-items-center p-3">
+                            <img class="card-img-top img-thumbnail rounded-4" style="width: 6rem;height: 6rem;" src="{{order.product.image.url}}" alt="Card image cap">
+                            <div class="card-body">
+                            <h5 class="card-title">{{order.product.name}}</h5>
+                            </div>
+                            <div class="card-body d-md-flex flex-row align-items-center justify-content-between">
+                                <p class="">{{order.product.price | intcomma}}₺</p>
+                                <p>Toplam Fİyat : {{order.total | intcomma}}₺</p>
+                            </div>
+                        </div>
+
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="row text-center">
+            <h5>Sepetiniz Boş</h5>
+        </div>
+        {% endif %}
+</div>
+{% endblock content %}
+
+<div class="bg-body-tertiary m-1 rounded-4 d-flex flex-row align-items-center p-3">
+    <img class="card-img-top img-thumbnail rounded-4" style="width: 6rem;height: 6rem;" src="{{order.product.image.url}}" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">{{order.product.name}}</h5>
+    </div>
+    <div class="card-body d-md-flex flex-row align-items-center justify-content-between">
+        <p class="">{{order.product.price | intcomma}}₺</p>
+        <p>Toplam Fİyat : {{order.total | intcomma}}₺</p>
+    </div>
+</div>

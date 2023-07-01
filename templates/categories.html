@@ -1,0 +1,80 @@
+{% extends "partials/_main.html" %}
+{% load static %}
+
+{% block style %}
+<style>
+.category-card {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 400px;
+    transition: all 0.5s ease;
+    cursor: pointer;
+  }
+  .category-card:hover{
+      transform: scale(0.95);
+  }
+  .category-card:hover .card-link{
+      display: block;
+  }
+  .category-card img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2;
+  }
+  .category-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Karartma rengi */
+    z-index: -1;
+    transition: all 1s ease;
+  }
+  .category-card:hover::before{
+    background-color: transparent; /* Karartma rengi */
+  }
+
+  .content {
+    text-align: center;
+    color: #fff;
+    transition: all 0.6s ease;
+  }
+  .card-link {
+      display: none;
+      text-decoration: none;
+      color: #fff;
+      
+  }
+</style>
+{% endblock style %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <h1 class="my-2 my-md-3 bg-body-tertiary rounded-5 shadow-sm p-3">Kategoriler</h1>
+    <div class="row d-flex justify-content-center p-2">
+        {% for category in categories %}
+        <div class="category-card rounded-2 col-6 m-1" style="max-width: 50rem; max-height: 15rem; width: 100%;">
+            <img src="{{category.image.url}}" alt="Background Image">
+            <div class="content">
+            <h5 class="text-white fs-3">{{category.name}}</h5>
+            <p>{{category.title}}</p>
+            <a href="{% url 'products_by_category' category.slug %}" class="card-link">Kategorideki Ürünler <i class="bi bi-box-arrow-up-right"></i></a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+
+  
+{% endblock content %}
