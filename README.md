@@ -126,11 +126,12 @@ Bu projede bir satıcılar ve müşteriler kullanıcı olarak kayıt olabilir, g
 
 ![-](tan%C4%B1t%C4%B1m/24.png)
 
++ Ürün kaldırmak için eklediğim ürünler sayfınsa üründe bulunan kaldır butonuna tıklayalım
 + Bir sorgu ekranı geliyor
 
 ![-](tan%C4%B1t%C4%B1m/25.png)
 
-+ Ürün kaldırıldığına dair bilgi mesajını görebiliri.
++ Ürün kaldırıldığına dair bilgi mesajını görebiliriz.
 + Göründüğü gibi eklenen ürünler artık boş
 
 ![-](tan%C4%B1t%C4%B1m/26.png)
