@@ -3,7 +3,8 @@
 Bu projede bir satıcılar ve müşteriler kullanıcı olarak kayıt olabilir, giriş yapabilirler.
 - Müsteriler sepete ekleme, sepetteki ürünleri silme, sayılarını güncelleme, ödeme yapma gibi işlemler yapabilir. Profil sayfalarından önceki siparişlerini görebilirler
 - Satıcılar ürün ekleyip kaldırabilir, profil sayfalarından ekledikleri ürünleri görebilirler.
-Canlı site için tıklayın [ipekyolu web sitesi](thegokg.pythonanywhere.com)
+Canlı site için tıklayın
+[ipekyolu web sitesi](thegokg.pythonanywhere.com)
 
 ### Başlangıç Sayfası
 + Anasayfa ekranı bu şekildedir, kullanıcılar buradan satıcı veya muüşteri oalrak kayıt olup giriş yapabilir.
